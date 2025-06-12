@@ -108,13 +108,21 @@ const ContractEditor = () => {
   };
 
   const updateContractData = (section: keyof ContractData, field: string, value: string) => {
-    setContractData(prev => ({
-      ...prev,
-      [section]: {
-        ...prev[section],
-        [field]: value
+    setContractData(prev => {
+      if (section === 'sender' || section === 'receiver' || section === 'location' || section === 'dates' || section === 'rates' || section === 'payment' || section === 'misc') {
+        return {
+          ...prev,
+          [section]: {
+            ...prev[section],
+            [field]: value
+          }
+        };
       }
-    }));
+      return {
+        ...prev,
+        [section]: value
+      };
+    });
   };
 
   const sections = [
